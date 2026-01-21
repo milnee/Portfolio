@@ -845,6 +845,78 @@ body {
   transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.card-spotlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-spotlight::before {
+  content: '';
+  position: absolute;
+  top: var(--mouse-y, 50%);
+  left: var(--mouse-x, 50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card-spotlight:hover::before {
+  opacity: 1;
+}
+
+[data-theme="light"] .card-spotlight::before {
+  background: radial-gradient(circle, rgba(2, 132, 199, 0.12) 0%, transparent 70%);
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .modal-content,
+  .modal-content * {
+    visibility: visible;
+  }
+
+  .modal-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: white !important;
+    color: black !important;
+    padding: 20px !important;
+  }
+
+  .modal-content button,
+  .modal-content .absolute {
+    display: none !important;
+  }
+
+  .modal-content .text-muted {
+    color: #4b5563 !important;
+  }
+
+  .modal-content .text-accent {
+    color: #0284c7 !important;
+  }
+
+  .modal-content .bg-white\/\[0\.02\],
+  .modal-content .bg-accent\/20,
+  .modal-content .bg-accent\/10 {
+    background: #f3f4f6 !important;
+  }
+
+  .modal-content .border-white\/5 {
+    border-color: #e5e7eb !important;
+  }
+}
+
 .preloader-logo {
   animation: preloader-pulse 1.5s ease-in-out infinite;
 }
