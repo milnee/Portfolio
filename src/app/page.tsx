@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 type Modal = "education" | "experience" | "projects" | "about" | "minecraft" | "fivem" | "webdev" | "cv" | null;
 
 export default function Home() {
   const [modal, setModal] = useState<Modal>(null);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const spotlightRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const saved = localStorage.getItem("theme") as "dark" | "light" | null;
@@ -14,6 +16,54 @@ export default function Home() {
       setTheme(saved);
       document.documentElement.setAttribute("data-theme", saved);
     }
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setModal(null);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+      if (spotlightRef.current) {
+        spotlightRef.current.style.left = `${e.clientX}px`;
+        spotlightRef.current.style.top = `${e.clientY}px`;
+      }
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("scroll-visible");
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    document.querySelectorAll(".scroll-reveal").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const handleMagnetic = useCallback((e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    const el = e.currentTarget;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+  }, []);
+
+  const handleMagneticLeave = useCallback((e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    e.currentTarget.style.transform = "translate(0, 0)";
   }, []);
 
   const toggleTheme = () => {
@@ -25,35 +75,50 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden noise">
+      <div
+        ref={spotlightRef}
+        className="fixed w-[500px] h-[500px] pointer-events-none z-0 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300"
+        style={{
+          background: "radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%)",
+          left: mousePos.x,
+          top: mousePos.y,
+        }}
+      />
       <div className="fixed inset-0 bg-grid" />
       <div className="fixed inset-0 bg-gradient-radial" />
       <div className="fixed inset-0 bg-gradient-radial-bottom" />
 
-      <div className="fixed top-20 left-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-orb-1" />
-      <div className="fixed bottom-20 right-20 w-80 h-80 bg-accent/8 rounded-full blur-3xl animate-orb-2" />
-      <div className="fixed top-1/2 left-1/2 w-64 h-64 bg-accent/5 rounded-full blur-3xl animate-orb-3" />
+      <div className="fixed top-20 left-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-orb-1 pointer-events-none" />
+      <div className="fixed bottom-20 right-20 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-orb-2 pointer-events-none" />
+      <div className="fixed top-1/2 left-1/2 w-64 h-64 bg-accent/5 rounded-full blur-3xl animate-orb-3 pointer-events-none" />
 
       <main className="relative z-10 w-full max-w-6xl mx-auto px-6 py-12">
         <div className="grid lg:grid-cols-12 gap-6">
           <aside className="lg:col-span-3 space-y-6">
-            <div className="glass glass-hover rounded-2xl p-6 text-center border-gradient animate-slide-up hover-glow">
+            <div className="glass glass-hover rounded-2xl p-6 text-center border-gradient scroll-reveal hover-glow">
               <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-accent to-accent-light flex items-center justify-center text-3xl font-bold text-black animate-float animate-glow-pulse">
                 MS
               </div>
               <h1 className="text-xl font-semibold tracking-tight text-shine">Millen Singh</h1>
-              <p className="text-accent font-mono text-sm mt-1">Software Developer</p>
+              <div className="typing-container mt-1">
+                <p className="text-accent font-mono text-sm typing-text">Software Developer</p>
+              </div>
               <div className="h-px w-12 mx-auto my-4 bg-gradient-to-r from-transparent via-accent to-transparent animate-gradient" />
               <div className="flex gap-3 justify-center">
                 <button
                   onClick={() => setModal("about")}
-                  className="text-sm text-muted hover:text-accent transition-colors hover-lift"
+                  onMouseMove={handleMagnetic}
+                  onMouseLeave={handleMagneticLeave}
+                  className="text-sm text-muted hover:text-accent transition-all hover-lift magnetic-btn"
                 >
                   About Me
                 </button>
                 <span className="text-card-border">|</span>
                 <button
                   onClick={() => setModal("cv")}
-                  className="text-sm text-accent hover:text-accent-light transition-colors hover-lift flex items-center gap-1"
+                  onMouseMove={handleMagnetic}
+                  onMouseLeave={handleMagneticLeave}
+                  className="text-sm text-accent hover:text-accent-light transition-all hover-lift flex items-center gap-1 magnetic-btn"
                 >
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                   View CV
@@ -61,7 +126,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="glass glass-hover rounded-2xl p-6 animate-slide-up-delay-1 hover-glow">
+            <div className="glass glass-hover rounded-2xl p-6 scroll-reveal scroll-delay-1 hover-glow">
               <h2 className="text-xs font-medium text-muted uppercase tracking-widest mb-4">Contact</h2>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 group">
@@ -86,7 +151,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="glass glass-hover rounded-2xl p-6 animate-slide-up-delay-2 hover-glow">
+            <div className="glass glass-hover rounded-2xl p-6 scroll-reveal scroll-delay-2 hover-glow">
               <h2 className="text-xs font-medium text-muted uppercase tracking-widest mb-4">Connect</h2>
               <div className="space-y-3">
                 <a href="https://www.linkedin.com/in/singhmillen/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
@@ -115,7 +180,9 @@ export default function Home() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <button
                 onClick={() => setModal("education")}
-                className="glass glass-hover rounded-2xl p-5 text-left glow-line animate-slide-up-delay-1 hover-glow card-3d"
+                onMouseMove={handleMagnetic}
+                onMouseLeave={handleMagneticLeave}
+                className="glass glass-hover rounded-2xl p-5 text-left glow-line scroll-reveal scroll-delay-1 hover-glow card-3d magnetic-btn"
               >
                 <div className="flex items-center gap-2 mb-3">
                   <span className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center text-accent animate-bounce-subtle">
@@ -130,7 +197,9 @@ export default function Home() {
 
               <button
                 onClick={() => setModal("experience")}
-                className="glass glass-hover rounded-2xl p-5 text-left glow-line animate-slide-up-delay-2 hover-glow card-3d"
+                onMouseMove={handleMagnetic}
+                onMouseLeave={handleMagneticLeave}
+                className="glass glass-hover rounded-2xl p-5 text-left glow-line scroll-reveal scroll-delay-2 hover-glow card-3d magnetic-btn"
               >
                 <div className="flex items-center gap-2 mb-3">
                   <span className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center text-accent animate-bounce-subtle stagger-2">
@@ -147,7 +216,9 @@ export default function Home() {
                 href="https://github.com/milnee"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass glass-hover rounded-2xl p-5 glow-line animate-slide-up-delay-3 hover-glow card-3d"
+                onMouseMove={handleMagnetic}
+                onMouseLeave={handleMagneticLeave}
+                className="glass glass-hover rounded-2xl p-5 glow-line scroll-reveal scroll-delay-3 hover-glow card-3d magnetic-btn"
               >
                 <div className="flex items-center gap-2 mb-3">
                   <span className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center text-accent animate-bounce-subtle stagger-3">
@@ -167,7 +238,7 @@ export default function Home() {
             </div>
 
             <div className="grid sm:grid-cols-3 gap-4">
-              <div className="sm:col-span-2 glass glass-hover rounded-2xl p-5 animate-slide-up-delay-3 hover-glow">
+              <div className="sm:col-span-2 glass glass-hover rounded-2xl p-5 scroll-reveal scroll-delay-3 hover-glow">
                 <h2 className="text-xs font-medium text-muted uppercase tracking-widest mb-4">Tech Stack</h2>
                 <div className="flex flex-wrap gap-2">
                   {["Next.js", "React", "TypeScript", "Java", "Lua", "HTML/CSS"].map((tech, i) => (
@@ -182,7 +253,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="glass glass-hover rounded-2xl p-5 animate-slide-up-delay-4 hover-glow">
+              <div className="glass glass-hover rounded-2xl p-5 scroll-reveal scroll-delay-4 hover-glow">
                 <h2 className="text-xs font-medium text-muted uppercase tracking-widest mb-4">Skills</h2>
                 <div className="flex flex-wrap gap-2">
                   {["Git", "Agile", "SQL", "APIs"].map((skill) => (
@@ -194,25 +265,30 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="glass rounded-2xl p-6 border-gradient animate-slide-up-delay-4 border-beam">
+            <div className="glass rounded-2xl p-6 border-gradient scroll-reveal scroll-delay-4 border-beam">
               <div className="flex justify-between items-center mb-5">
                 <h2 className="text-xs font-medium text-muted uppercase tracking-widest">Projects</h2>
-                <button onClick={() => setModal("projects")} className="text-sm text-accent hover:underline underline-offset-4 hover-lift">
+                <button
+                  onClick={() => setModal("projects")}
+                  onMouseMove={handleMagnetic}
+                  onMouseLeave={handleMagneticLeave}
+                  className="text-sm text-accent hover:underline underline-offset-4 hover-lift magnetic-btn"
+                >
                   View All
                 </button>
               </div>
               <div className="grid sm:grid-cols-3 gap-4">
-                <button onClick={() => setModal("minecraft")} className="p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-accent/30 hover:bg-white/[0.04] transition-all text-left group hover-lift">
+                <button onClick={() => setModal("minecraft")} onMouseMove={handleMagnetic} onMouseLeave={handleMagneticLeave} className="p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-accent/30 hover:bg-white/[0.04] transition-all text-left group hover-lift magnetic-btn">
                   <p className="font-medium group-hover:text-accent transition-colors">Minecraft Plugins</p>
                   <p className="text-xs text-muted mt-1 font-mono">Java, MySQL, MongoDB</p>
                   <p className="text-xs text-muted/60 mt-3 leading-relaxed">Custom server plugins for gameplay enhancement</p>
                 </button>
-                <button onClick={() => setModal("fivem")} className="p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-accent/30 hover:bg-white/[0.04] transition-all text-left group hover-lift">
+                <button onClick={() => setModal("fivem")} onMouseMove={handleMagnetic} onMouseLeave={handleMagneticLeave} className="p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-accent/30 hover:bg-white/[0.04] transition-all text-left group hover-lift magnetic-btn">
                   <p className="font-medium group-hover:text-accent transition-colors">FiveM Scripts</p>
                   <p className="text-xs text-muted mt-1 font-mono">Lua, QBCore Framework</p>
                   <p className="text-xs text-muted/60 mt-3 leading-relaxed">Server scripts with commands & permissions</p>
                 </button>
-                <button onClick={() => setModal("webdev")} className="p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-accent/30 hover:bg-white/[0.04] transition-all text-left group hover-lift">
+                <button onClick={() => setModal("webdev")} onMouseMove={handleMagnetic} onMouseLeave={handleMagneticLeave} className="p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-accent/30 hover:bg-white/[0.04] transition-all text-left group hover-lift magnetic-btn">
                   <p className="font-medium group-hover:text-accent transition-colors">Web Development</p>
                   <p className="text-xs text-muted mt-1 font-mono">HTML, CSS</p>
                   <p className="text-xs text-muted/60 mt-3 leading-relaxed">Responsive websites with modern design</p>
@@ -221,7 +297,7 @@ export default function Home() {
             </div>
 
             <div className="grid sm:grid-cols-3 gap-4">
-              <div className="sm:col-span-2 glass glass-hover rounded-2xl p-5 animate-slide-up-delay-5 hover-glow">
+              <div className="sm:col-span-2 glass glass-hover rounded-2xl p-5 scroll-reveal scroll-delay-5 hover-glow">
                 <h2 className="text-xs font-medium text-muted uppercase tracking-widest mb-4">Strengths</h2>
                 <div className="flex flex-wrap gap-2">
                   {["Problem-solving", "Adaptability", "Proactive Learning", "Attention to Detail", "Teamwork"].map((s, i) => (
@@ -236,9 +312,9 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="glass glass-hover rounded-2xl p-5 flex flex-col justify-center items-center text-center border-gradient animate-slide-up-delay-5 hover-glow animate-glow-pulse">
+              <div className="glass glass-hover rounded-2xl p-5 flex flex-col justify-center items-center text-center border-gradient scroll-reveal scroll-delay-5 hover-glow animate-glow-pulse">
                 <p className="text-xs text-muted uppercase tracking-wider">Seeking Placement</p>
-                <p className="text-accent font-semibold text-lg mt-1 gradient-text">September 2026</p>
+                <p className="text-accent font-semibold text-lg mt-1">September 2026</p>
               </div>
             </div>
           </section>
@@ -248,7 +324,9 @@ export default function Home() {
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40">
         <button
           onClick={toggleTheme}
-          className="glass glass-hover rounded-full px-4 py-2 flex items-center gap-2 text-sm text-muted hover:text-foreground transition-all hover-glow"
+          onMouseMove={handleMagnetic}
+          onMouseLeave={handleMagneticLeave}
+          className="glass glass-hover rounded-full px-4 py-2 flex items-center gap-2 text-sm text-muted hover:text-foreground transition-all hover-glow magnetic-btn"
         >
           {theme === "dark" ? (
             <>
@@ -266,9 +344,9 @@ export default function Home() {
 
       {modal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-6" onClick={() => setModal(null)}>
-          <div className="absolute inset-0 bg-black/90" />
+          <div className="absolute inset-0 bg-black/95" />
           <div
-            className={`relative rounded-2xl p-8 w-full animate-fade-in-scale max-h-[90vh] overflow-auto smooth-scroll ${modal === "cv" ? "max-w-4xl glass-solid" : modal === "projects" ? "max-w-3xl glass border-gradient" : "max-w-lg glass border-gradient"}`}
+            className={`relative rounded-2xl p-8 w-full animate-fade-in-scale max-h-[90vh] overflow-auto smooth-scroll modal-content ${modal === "cv" ? "max-w-4xl" : modal === "projects" ? "max-w-3xl" : "max-w-lg"}`}
             onClick={(e) => e.stopPropagation()}
           >
             <button onClick={() => setModal(null)} className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 hover:rotate-90 flex items-center justify-center text-muted hover:text-foreground transition-all">

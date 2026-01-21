@@ -13,8 +13,27 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Millen Singh | Portfolio",
-  description: "Welcome to my portfolio",
+  title: "Millen Singh | Software Developer",
+  description: "Second-year Computer Science student at Ulster University seeking placement opportunities. Passionate about building web applications with React, Next.js, and TypeScript.",
+  keywords: ["Millen Singh", "Software Developer", "Portfolio", "Ulster University", "React", "Next.js", "TypeScript", "Web Developer"],
+  authors: [{ name: "Millen Singh" }],
+  openGraph: {
+    title: "Millen Singh | Software Developer",
+    description: "Second-year Computer Science student seeking placement opportunities. Building web applications with modern technologies.",
+    url: "https://millensingh.com",
+    siteName: "Millen Singh Portfolio",
+    locale: "en_GB",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Millen Singh | Software Developer",
+    description: "Second-year Computer Science student seeking placement opportunities.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
