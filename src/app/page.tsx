@@ -240,10 +240,7 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="flex items-center gap-3 group">
                   <span className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center text-accent text-sm group-hover:bg-accent/20 group-hover:scale-110 transition-all">@</span>
-                  <div className="flex flex-col min-w-0">
-                    <a href="mailto:millen2005@outlook.com" className="text-xs hover:text-accent transition-colors truncate">millen2005@outlook.com</a>
-                    <a href="mailto:singh-m21@ulster.ac.uk" className="text-xs text-muted hover:text-accent transition-colors truncate">singh-m21@ulster.ac.uk</a>
-                  </div>
+                  <a href="mailto:millensh@outlook.com" className="text-sm hover:text-accent transition-colors">millensh@outlook.com</a>
                 </div>
                 <a href="https://www.google.com/maps/search/Northern+Ireland" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
                   <span className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center text-accent text-sm group-hover:bg-accent/20 group-hover:scale-110 transition-all">
@@ -660,8 +657,8 @@ export default function Home() {
                       </p>
                     </div>
                     <div className="text-right text-sm space-y-2 shrink-0">
-                      <a href="mailto:singh-m21@ulster.ac.uk" className="flex items-center gap-2 text-muted hover:text-accent transition-colors justify-end">
-                        <span>singh-m21@ulster.ac.uk</span>
+                      <a href="mailto:millensh@outlook.com" className="flex items-center gap-2 text-muted hover:text-accent transition-colors justify-end">
+                        <span>millensh@outlook.com</span>
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                       </a>
                       <div className="flex gap-3 justify-end pt-1">
