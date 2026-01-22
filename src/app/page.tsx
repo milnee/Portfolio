@@ -241,21 +241,15 @@ export default function Home() {
                 <div className="flex items-center gap-3 group">
                   <span className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center text-accent text-sm group-hover:bg-accent/20 group-hover:scale-110 transition-all">@</span>
                   <div className="flex flex-col min-w-0">
-                    <a href="mailto:singhmillen@gmail.com" className="text-sm hover:text-accent transition-colors truncate">singhmillen@gmail.com</a>
+                    <a href="mailto:millen2005@outlook.com" className="text-xs hover:text-accent transition-colors truncate">millen2005@outlook.com</a>
                     <a href="mailto:singh-m21@ulster.ac.uk" className="text-xs text-muted hover:text-accent transition-colors truncate">singh-m21@ulster.ac.uk</a>
                   </div>
                 </div>
-                <a href="tel:+447404225469" className="flex items-center gap-3 group">
-                  <span className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center text-accent text-sm group-hover:bg-accent/20 group-hover:scale-110 transition-all">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                  </span>
-                  <span className="text-sm group-hover:text-accent transition-colors">+44 7404225469</span>
-                </a>
-                <a href="https://www.google.com/maps/search/Derry+Londonderry+UK" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
+                <a href="https://www.google.com/maps/search/Northern+Ireland" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
                   <span className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center text-accent text-sm group-hover:bg-accent/20 group-hover:scale-110 transition-all">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                   </span>
-                  <span className="text-sm group-hover:text-accent transition-colors">Derry, Northern Ireland</span>
+                  <span className="text-sm group-hover:text-accent transition-colors">Northern Ireland</span>
                 </a>
               </div>
             </div>
@@ -263,15 +257,15 @@ export default function Home() {
             <div className="glass glass-hover rounded-2xl p-6 scroll-reveal scroll-delay-2 hover-glow card-spotlight" onMouseMove={handleCardSpotlight}>
               <h2 className="text-xs font-medium text-muted uppercase tracking-widest mb-4">Connect</h2>
               <div className="space-y-2">
-                <a href="https://www.linkedin.com/in/singhmillen/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-2 -mx-2 rounded-xl group hover:bg-[#0A66C2]/10 transition-all">
-                  <span className="w-10 h-10 rounded-xl bg-[#0A66C2]/20 flex items-center justify-center text-[#0A66C2] group-hover:scale-110 group-hover:bg-[#0A66C2] group-hover:text-white transition-all">
+                <a href="https://www.linkedin.com/in/singhmillen/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-2 -mx-2 rounded-xl group hover:bg-white/5 transition-all">
+                  <span className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-foreground group-hover:scale-110 group-hover:bg-white group-hover:text-black transition-all">
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                   </span>
                   <div className="flex-1">
-                    <p className="text-sm font-medium group-hover:text-[#0A66C2] transition-colors">LinkedIn</p>
+                    <p className="text-sm font-medium group-hover:text-foreground transition-colors">LinkedIn</p>
                     <p className="text-xs text-muted">@singhmillen</p>
                   </div>
-                  <svg className="w-4 h-4 text-muted group-hover:text-[#0A66C2] group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
+                  <svg className="w-4 h-4 text-muted group-hover:text-foreground group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
                 </a>
                 <a href="https://github.com/milnee" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-2 -mx-2 rounded-xl group hover:bg-white/5 transition-all">
                   <span className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-foreground group-hover:scale-110 group-hover:bg-white group-hover:text-black transition-all">
@@ -666,10 +660,6 @@ export default function Home() {
                       </p>
                     </div>
                     <div className="text-right text-sm space-y-2 shrink-0">
-                      <a href="tel:+447404225469" className="flex items-center gap-2 text-muted hover:text-accent transition-colors justify-end">
-                        <span>+44 7404225469</span>
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                      </a>
                       <a href="mailto:singh-m21@ulster.ac.uk" className="flex items-center gap-2 text-muted hover:text-accent transition-colors justify-end">
                         <span>singh-m21@ulster.ac.uk</span>
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
