@@ -189,9 +189,8 @@ export default function ProjectsPage() {
 
     let animationId: number;
     let particles: { x: number; y: number; vx: number; vy: number; size: number }[] = [];
-    let mouse = { x: 0, y: 0 };
     let lastTime = 0;
-    const fps = 30;
+    const fps = 20;
     const frameInterval = 1000 / fps;
 
     const resize = () => {
@@ -202,13 +201,13 @@ export default function ProjectsPage() {
 
     const createParticles = () => {
       particles = [];
-      const count = Math.min(Math.floor((canvas.width * canvas.height) / 25000), 60);
+      const count = Math.min(Math.floor((canvas.width * canvas.height) / 50000), 30);
       for (let i = 0; i < count; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
+          vx: (Math.random() - 0.5) * 0.2,
+          vy: (Math.random() - 0.5) * 0.2,
           size: Math.random() * 1.5 + 0.5,
         });
       }
@@ -224,7 +223,7 @@ export default function ProjectsPage() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const isDark = theme === "dark";
 
-      particles.forEach((p, i) => {
+      particles.forEach((p) => {
         p.x += p.vx;
         p.y += p.vy;
         if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
@@ -234,50 +233,16 @@ export default function ProjectsPage() {
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = isDark ? "rgba(14, 165, 233, 0.4)" : "rgba(2, 132, 199, 0.3)";
         ctx.fill();
-
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dx = p.x - p2.x;
-          const dy = p.y - p2.y;
-          const distSq = dx * dx + dy * dy;
-          if (distSq < 10000) {
-            const dist = Math.sqrt(distSq);
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = isDark ? `rgba(14, 165, 233, ${0.12 - dist / 833})` : `rgba(2, 132, 199, ${0.08 - dist / 1250})`;
-            ctx.stroke();
-          }
-        }
-
-        const mdx = p.x - mouse.x;
-        const mdy = p.y - mouse.y;
-        const mDistSq = mdx * mdx + mdy * mdy;
-        if (mDistSq < 22500) {
-          const mDist = Math.sqrt(mDistSq);
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = isDark ? `rgba(14, 165, 233, ${0.25 - mDist / 600})` : `rgba(2, 132, 199, ${0.2 - mDist / 750})`;
-          ctx.stroke();
-        }
       });
-    };
-
-    const handleMouse = (e: MouseEvent) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
     };
 
     resize();
     animationId = requestAnimationFrame(animate);
     window.addEventListener("resize", resize);
-    window.addEventListener("mousemove", handleMouse);
 
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", handleMouse);
     };
   }, [theme]);
 
