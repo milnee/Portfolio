@@ -1,6 +1,15 @@
 import Link from "next/link";
+import { EmailCopy } from "@/components/email-copy";
 
 const projects = [
+  {
+    title: "better-pdf",
+    description: "privacy-focused pdf toolkit - merge, edit, compress, sign, watermark pdfs. 100% client-side processing",
+    tech: ["next.js", "react", "typescript", "pdf-lib"],
+    link: "https://better-pdf.com",
+    github: "https://github.com/milnee/better-pdf",
+    date: "jan 2026",
+  },
   {
     title: "portfolio",
     description: "personal site built with next.js 16, react 19, and typescript",
@@ -45,7 +54,7 @@ export default function Projects() {
             <Link href="/" className="hover:text-[#e5e5e5] transition-colors link-hover">home</Link>
             <span className="text-[#e5e5e5]">projects</span>
             <span className="text-[#333]">|</span>
-            <a href="mailto:millensh@outlook.com" className="hover:text-[#e5e5e5] transition-colors link-hover">email</a>
+            <EmailCopy email="millensh@outlook.com" />
             <a href="https://github.com/milnee" target="_blank" rel="noopener noreferrer" className="hover:text-[#e5e5e5] transition-colors link-hover">github</a>
           </nav>
         </header>
