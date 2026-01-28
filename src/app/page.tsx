@@ -1,3 +1,5 @@
+import { EmailCopy } from '@/components/email-copy'
+
 const skills = ["typescript", "react", "next.js", "java", "lua", "html/css"];
 const interests = ["open source", "gaming", "web development"];
 
@@ -14,7 +16,7 @@ export default function Home() {
             <span className="text-[#e5e5e5]">home</span>
             <a href="/projects" className="hover:text-[#e5e5e5] transition-colors link-hover">projects</a>
             <span className="text-[#333]">|</span>
-            <a href="mailto:millensh@outlook.com" className="hover:text-[#e5e5e5] transition-colors link-hover">email</a>
+            <EmailCopy email="millensh@outlook.com" />
             <a href="https://github.com/milnee" target="_blank" rel="noopener noreferrer" className="hover:text-[#e5e5e5] transition-colors link-hover">github</a>
           </nav>
         </header>
@@ -61,7 +63,7 @@ export default function Home() {
               <a href="https://linkedin.com/in/singhmillen" target="_blank" rel="noopener noreferrer" className="text-[#e5e5e5] hover:text-[#4ade80] transition-colors link-hover w-fit">linkedin</a>
               <a href="https://github.com/milnee" target="_blank" rel="noopener noreferrer" className="text-[#e5e5e5] hover:text-[#4ade80] transition-colors link-hover w-fit">github</a>
               <a href="https://twitter.com/m1lles05" target="_blank" rel="noopener noreferrer" className="text-[#e5e5e5] hover:text-[#4ade80] transition-colors link-hover w-fit">twitter</a>
-              <a href="/cv.pdf" download="Millen_CV.pdf" className="text-[#e5e5e5] hover:text-[#4ade80] transition-colors link-hover w-fit">download cv</a>
+              <a href="/cv" className="text-[#e5e5e5] hover:text-[#4ade80] transition-colors link-hover w-fit">view cv</a>
             </div>
           </section>
         </div>
