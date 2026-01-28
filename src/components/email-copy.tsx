@@ -35,7 +35,7 @@ export function EmailCopy({ email }: { email: string }) {
     <button
       type="button"
       onClick={handleCopy}
-      className="hover:text-[#e5e5e5] transition-colors link-hover cursor-pointer"
+      className="hover:text-[#e5e5e5] transition-colors link-hover cursor-pointer w-[52px] text-left"
     >
       {copied ? 'copied!' : 'email'}
     </button>
