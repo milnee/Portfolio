@@ -6,6 +6,7 @@ const projects = [
     title: "picture.sh",
     description: "pinterest-inspired image sharing platform - discover, save, and organise images. free saas, no paywalls",
     tech: ["next.js", "typescript", "tailwind"],
+    link: "https://picture.sh",
     date: "mar 2026",
   },
   {
