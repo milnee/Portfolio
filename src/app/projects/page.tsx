@@ -3,6 +3,12 @@ import { EmailCopy } from "@/components/email-copy";
 
 const projects = [
   {
+    title: "picture.sh",
+    description: "pinterest-inspired image sharing platform - discover, save, and organise images. free saas, no paywalls",
+    tech: ["next.js", "typescript", "tailwind"],
+    date: "mar 2026",
+  },
+  {
     title: "devpulse",
     description: "instant github developer analytics dashboard - no sign-up or oauth required, built from public github data",
     tech: ["next.js", "typescript", "tailwind", "recharts"],
