@@ -8,7 +8,7 @@ const projects = [
     tech: ["next.js", "typescript", "tailwind", "recharts"],
     link: "https://devpulse-afks.vercel.app",
     github: "https://github.com/milnee/devpulse",
-    date: "apr 2026",
+    date: "mar 2026",
   },
   {
     title: "better-pdf",
