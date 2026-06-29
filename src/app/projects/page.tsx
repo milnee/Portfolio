@@ -3,6 +3,13 @@ import { EmailCopy } from "@/components/email-copy";
 
 const projects = [
   {
+    title: "kebab house derry",
+    description: "online ordering site for a derry takeaway - menu, cart, stripe checkout and a merchant admin dashboard",
+    tech: ["next.js", "supabase", "stripe", "typescript"],
+    link: "https://kebabhousederry.com",
+    date: "jun 2026",
+  },
+  {
     title: "picture.sh",
     description: "pinterest-inspired image sharing platform - discover, save, and organise images. free saas, no paywalls",
     tech: ["next.js", "typescript", "tailwind"],
