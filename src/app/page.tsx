@@ -25,17 +25,17 @@ export default function Home() {
           <section className="grid grid-cols-1 sm:grid-cols-[100px_1fr] gap-2 sm:gap-x-8 animate-in delay-1">
             <span className="text-[#666]">about</span>
             <p className="text-[#999] leading-relaxed">
-              second-year computer science student at ulster university. passionate about building
-              web applications and exploring new technologies. seeking a software engineering
-              placement for september 2026.
+              computer science student at ulster university, on a year-long placement as an it
+              intern at seagate technology (aug 2026 – aug 2027). i build and ship web apps and
+              enjoy exploring new technologies.
             </p>
           </section>
 
           <section className="grid grid-cols-1 sm:grid-cols-[100px_1fr] gap-2 sm:gap-x-8 animate-in delay-2">
             <span className="text-[#666]">now</span>
             <div className="text-[#999] leading-relaxed">
-              <p>building side projects and learning new frameworks.</p>
-              <p className="mt-2">currently exploring rust and systems programming.</p>
+              <p>settling into my it placement at seagate technology.</p>
+              <p className="mt-2">building side projects and exploring rust on the side.</p>
             </div>
           </section>
 
