@@ -35,7 +35,7 @@ export default function Home() {
             <span className="text-[#666]">now</span>
             <div className="text-[#999] leading-relaxed">
               <p>settling into my it placement at seagate technology.</p>
-              <p className="mt-2">building side projects and exploring rust on the side.</p>
+              <p className="mt-2">building side projects in my spare time.</p>
             </div>
           </section>
 
