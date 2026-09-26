@@ -17,14 +17,6 @@ const projects = [
     date: "mar 2026",
   },
   {
-    title: "devpulse",
-    description: "instant github developer analytics dashboard - no sign-up or oauth required, built from public github data",
-    tech: ["next.js", "typescript", "tailwind", "recharts"],
-    link: "https://devpulse-afks.vercel.app",
-    github: "https://github.com/milnee/devpulse",
-    date: "mar 2026",
-  },
-  {
     title: "better-pdf",
     description: "privacy-focused pdf toolkit - merge, edit, compress, sign, watermark pdfs. 100% client-side processing",
     tech: ["next.js", "react", "typescript", "pdf-lib"],
